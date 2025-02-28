@@ -29,5 +29,5 @@ jobs:
           password: ${{ secrets.SFTP_PASSWORD }}
           protocol: ftps       # Changed to FTPS
           port: 21            # Changed to FTPS port
-          local-dir: ./build/
+          local-dir: ./dist/
           server-dir: ./
