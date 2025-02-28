@@ -2,7 +2,7 @@ name: Deploy Test to SFTP Cloud
 on:
   push:
     branches:
-      - main  # or your test branch
+      - main
 
 jobs:
   build-and-deploy:
@@ -27,7 +27,6 @@ jobs:
           server: ${{ secrets.SFTP_SERVER }}
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          local-dir: ./build/  # adjust this to your build output directory
-          server-dir: ./      # adjust this to your SFTP Cloud directory path
-          protocol: sftp      # specifically use SFTP protocol
-          port: 22           # default SFTP port
+          local_path: './build/*'    # Changed from local-dir
+          remote_path: './'          # Changed from server-dir
+          port: 22
