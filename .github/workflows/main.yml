@@ -21,13 +21,20 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: List directories after build
+        run: |
+          echo "Listing directories:"
+          ls -la
+          echo "Listing .svelte-kit directory (if exists):"
+          ls -la .svelte-kit/ || echo "No .svelte-kit directory"
+
       - name: Deploy to SFTPCloud
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.SFTP_SERVER }}
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          protocol: ftps       # Changed to FTPS
-          port: 21            # Changed to FTPS port
-          local-dir: ./dist/
+          protocol: ftps
+          port: 21
+          local-dir: ./.svelte-kit/output/
           server-dir: ./
