@@ -22,7 +22,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to SFTP Cloud
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.SFTP_SERVER }}
           username: ${{ secrets.SFTP_USERNAME }}
