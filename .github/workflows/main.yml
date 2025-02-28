@@ -1,0 +1,33 @@
+name: Deploy Test to SFTP Cloud
+on:
+  push:
+    branches:
+      - main  # or your test branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to SFTP Cloud
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          local-dir: ./build/  # adjust this to your build output directory
+          server-dir: ./      # adjust this to your SFTP Cloud directory path
+          protocol: sftp      # specifically use SFTP protocol
+          port: 22           # default SFTP port
